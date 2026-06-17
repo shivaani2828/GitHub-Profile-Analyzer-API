@@ -1,0 +1,41 @@
+CREATE DATABASE IF NOT EXISTS github_profile_analyzer;
+
+USE github_profile_analyzer;
+
+CREATE TABLE IF NOT EXISTS analyzed_profiles (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  github_id BIGINT UNSIGNED NOT NULL,
+  username VARCHAR(120) NOT NULL,
+  name VARCHAR(255) NULL,
+  avatar_url VARCHAR(500) NULL,
+  profile_url VARCHAR(500) NOT NULL,
+  bio TEXT NULL,
+  company VARCHAR(255) NULL,
+  blog VARCHAR(500) NULL,
+  location VARCHAR(255) NULL,
+  email VARCHAR(255) NULL,
+  twitter_username VARCHAR(255) NULL,
+  public_repos INT UNSIGNED NOT NULL DEFAULT 0,
+  public_gists INT UNSIGNED NOT NULL DEFAULT 0,
+  followers INT UNSIGNED NOT NULL DEFAULT 0,
+  following INT UNSIGNED NOT NULL DEFAULT 0,
+  account_created_at DATETIME NULL,
+  github_updated_at DATETIME NULL,
+  total_stars INT UNSIGNED NOT NULL DEFAULT 0,
+  total_forks INT UNSIGNED NOT NULL DEFAULT 0,
+  source_repository_count INT UNSIGNED NOT NULL DEFAULT 0,
+  forked_repository_count INT UNSIGNED NOT NULL DEFAULT 0,
+  top_language VARCHAR(120) NULL,
+  most_starred_repository_name VARCHAR(255) NULL,
+  most_starred_repository_stars INT UNSIGNED NOT NULL DEFAULT 0,
+  top_repositories JSON NULL,
+  analyzed_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_analyzed_profiles_github_id (github_id),
+  UNIQUE KEY uq_analyzed_profiles_username (username),
+  KEY idx_analyzed_profiles_analyzed_at (analyzed_at),
+  KEY idx_analyzed_profiles_followers (followers),
+  KEY idx_analyzed_profiles_public_repos (public_repos)
+);

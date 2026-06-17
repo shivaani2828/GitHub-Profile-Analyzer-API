@@ -1,0 +1,63 @@
+{
+  "info": {
+    "name": "GitHub Profile Analyzer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "username",
+      "value": "octocat"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/health"
+      }
+    },
+    {
+      "name": "Analyze GitHub Profile",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"{{username}}\"\n}"
+        },
+        "url": "{{baseUrl}}/api/profiles/analyze"
+      }
+    },
+    {
+      "name": "Analyze GitHub Profile by URL Param",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/profiles/{{username}}/analyze"
+      }
+    },
+    {
+      "name": "Get All Analyzed Profiles",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/profiles"
+      }
+    },
+    {
+      "name": "Get Single Analyzed Profile",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/profiles/{{username}}"
+      }
+    }
+  ]
+}
